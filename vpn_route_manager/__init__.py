@@ -2,7 +2,7 @@
 import iplookup
 
 # Local modules
-import meraki
+import meraki, taskRunner
 
 # Load my local secrets for apikey + networkid until I get the config files sorted.
 import secrets
@@ -31,6 +31,18 @@ for dict in route_list:
 print(subnets)
 
 # For each IP from DomainsList, ensure route on localhost via VPN GW -- method YTBD
+## Once we have polled the domainslist the first time, schedule a periodic re-check
 
 # For each IP from DomainsList; find missing from MerakiList, and add.
 # For each IP in MerakiList missing from DomainList, Delete it
+
+
+
+# Code layout should be:
+- Imports
+- API Endpoints for Flask
+- Initialise vars as __main__ (Read from config?)
+- Next; poll Domains list, and run initial on-load comparisons and settings
+- When initial run complete, start Periodic
+#rt = taskRunner.Periodic(300, pollDomains)
+- Start Flask Server
