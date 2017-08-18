@@ -12,8 +12,11 @@ networkid = secrets.get_networkid()
 # Create a Meraki API Object instance
 api = meraki.Meraki(apikey, networkid)
 
-# Call the Meraki Object's getroutes method to get the routes
+# Call the Meraki Object's getroutes method to get the routes (List of Dictionaries)
 routes = api.getroutes()
+if routes == False:
+    print("The API Call to Meraki returned a non-OK Error")
+    sys.exit(1)
 
 # Strip list to routes which start with 'keyword' in their names (allows us to only handle our own routes without touching others)
 keyword = "IPT"
